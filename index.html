@@ -77,6 +77,9 @@
     <div id="main-content">
         <header>
             <h1 style="color:var(--gold); margin:0;">Familytube Premium</h1>
+            <input type="text" id="searchBox" placeholder="検索..." onkeyup="searchVideos()" style="padding:8px; width:60%; margin:10px 0;">
+
+<div class="nav-tabs">
             <div class="nav-tabs">
                 <div class="tab active">ホーム</div>
                 <div class="tab">アニメ</div>
@@ -89,8 +92,12 @@
         <div class="container">
             <main>
                 <div class="video-grid" id="video-grid">
-                    <div class="video-card"><img src="https://picsum.photos" class="thumb"><h3>Welcome to Familytube</h3></div>
-                </div>
+    <div class="video-card" data-title="welcome 紹介 familytube">
+        <img src="https://picsum.photos" class="thumb">
+        <h3>Welcome to Familytube</h3>
+    </div>
+</div>
+
             </main>
 
             <aside>
@@ -168,6 +175,26 @@
             setTimeout(() => notice.remove(), 3000);
         }
     </script>
+    <script>
+function searchVideos() {
+  let input = document.getElementById("searchBox").value.toLowerCase();
+  let videos = document.querySelectorAll(".video-card");
+
+  videos.forEach(video => {
+    let title = video.getAttribute("data-title");
+    if (!title) return;
+
+    title = title.toLowerCase();
+
+    if (title.includes(input)) {
+      video.style.display = "block";
+    } else {
+      video.style.display = "none";
+    }
+  });
+}
+</script>
+
     <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
