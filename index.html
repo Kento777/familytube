@@ -77,7 +77,8 @@
     <div id="main-content">
         <header>
             <h1 style="color:var(--gold); margin:0;">Familytube Premium</h1>
-            <input type="text" id="searchBox" placeholder="検索..." onkeyup="searchVideos()" style="padding:8px; width:60%; margin:10px 0;">
+            <input type="text" id="searchBox" placeholder="検索..." onkeyup="searchVideos()" onkeypress="if(event.key==='Enter'){searchVideos();}" style="padding:8px; width:60%; margin:10px 0;">
+
 
 <div class="nav-tabs">
             <div class="nav-tabs">
