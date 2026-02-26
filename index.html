@@ -187,7 +187,20 @@
             });
             document.getElementById('chat-input').value = "";
         }
+/ --- 1. Firebase設定を追加 ---
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        databaseURL: "https://YOUR-PROJECT-NAME.firebaseio.com",
+        projectId: "YOUR-PROJECT-ID",
+        appId: "YOUR-APP-ID"
+    };
 
+    // 一旦エラーを防ぐために、頭に // をつけて無効化しておきます
+    // firebase.initializeApp(firebaseConfig); 
+    const db = { ref: () => ({ on: () => {}, push: () => {}, set: () => {}, remove: () => {} }) }; 
+
+    // --- 2. 既存のコードがここから続く ---
+    db.ref('msgs').on('value', (snap) => {
         db.ref('msgs').on('value', (snap) => {
             const box = document.getElementById('chat-msgs');
             box.innerHTML = "";
