@@ -222,7 +222,7 @@ const API_KEY = "あなたのYouTube APIキー";
 
 async function searchVideos() {
   const q = document.getElementById("searchBox").value;
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&maxResults=12&type=video&key=${API_KEY}`;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&maxResults=20&key=${API_KEY}`;
 
   const res = await fetch(url);
   const data = await res.json();
@@ -231,7 +231,7 @@ async function searchVideos() {
   grid.innerHTML = "";
 
   data.items.forEach(v => {
-    const videoId = v.id.videoId;
+    const videoId = v.id.videoId || v.id.playlistId;
     const title = v.snippet.title;
     const thumb = v.snippet.thumbnails.medium.url;
 
