@@ -92,6 +92,8 @@
 
         <div class="container">
             <main>
+                <input type="text" id="searchBox" placeholder="検索..." style="width:80%;padding:10px;margin:20px 0;">
+<button onclick="searchVideos()">検索</button>
                 <div class="video-grid" id="video-grid">
      <div class="video-card" data-title="welcome 紹介 familytube">
         <img src="https://picsum.photos" class="thumb">
@@ -218,6 +220,43 @@ function searchVideos() {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+</script> ← Firebaseここで終わり
+
+<script>
+const API_KEY = "あなたのYouTube APIキー";
+
+async function searchVideos() {
+  const q = document.getElementById("searchBox").value;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&maxResults=12&type=video&key=${API_KEY}`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  const grid = document.getElementById("video-grid");
+  grid.innerHTML = "";
+
+  data.items.forEach(v => {
+    const videoId = v.id.videoId;
+    const title = v.snippet.title;
+    const thumb = v.snippet.thumbnails.medium.url;
+
+    grid.innerHTML += `
+      <div class="video-card">
+        <img src="${thumb}" class="thumb" onclick="playVideo('${videoId}')">
+        <h3>${title}</h3>
+      </div>
+    `;
+  });
+}
+
+function playVideo(id) {
+  document.getElementById("video-grid").innerHTML = `
+    <iframe width="100%" height="500"
+    src="https://www.youtube.com/embed/${id}"
+    frameborder="0" allowfullscreen></iframe>
+  `;
+}
 </script>
+
 </body>
 </html>
