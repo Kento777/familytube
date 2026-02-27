@@ -245,11 +245,13 @@ async function searchVideos() {
 }
 
 function playVideo(id) {
-  document.getElementById("video-grid").innerHTML = `
+  const player = document.createElement("div");
+  player.innerHTML = `
     <iframe width="100%" height="500"
     src="https://www.youtube.com/embed/${id}"
     frameborder="0" allowfullscreen></iframe>
   `;
+  document.querySelector("main").prepend(player);
 }
 </script>
 
