@@ -231,6 +231,9 @@ async function searchVideos() {
   grid.innerHTML = "";
 
   data.items.forEach(v => {
+
+      if (!v.id.videoId) return; //
+      
     const videoId = v.id.videoId || v.id.playlistId;
     const title = v.snippet.title;
     const thumb = v.snippet.thumbnails.medium.url;
